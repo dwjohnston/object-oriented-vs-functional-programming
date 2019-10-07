@@ -282,7 +282,7 @@ describe("FanRecursiveLineMaker recursionDepth: 2, nChildrenPerLevel: 2, x: 0, y
         const t0 = Date.now(); 
         const m0 = getMemory(); 
 
-        const li0 = instantiateFanRecursive(2, 2, 0, 0, 1, 1, 2, 1);
+        const li0 = instantiateFanRecursive(20, 2, 0, 0, 1, 1, 2, 1);
         const r0 = getDrawablesFromLineInstances(li0); 
         printMemory(getMemory() - m0); 
         console.info(`Length: ${r0.length}`); 
