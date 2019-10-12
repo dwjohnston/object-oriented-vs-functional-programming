@@ -5,6 +5,11 @@ import { createLinearMultiLineTickFn } from "../functional-approach-1__as-a-func
 import { createFanRecursiveTickFn } from "../functional-approach-1__as-a-function-of-t/createFanRecursive";
 import { instantiateLinearMultiLine, reduceLinearMultiLine, getDrawablesFromLineInstances } from "../functional-approach-2__state-reducer/createLinearMultiLine";
 import { instantiateFanRecursive, reduceFanRecursive } from "../functional-approach-2__state-reducer/createFanRecursive";
+import { Mover } from "../object-oriented-v2/Mover";
+import { StaticValueProvider } from "../object-oriented-v2/StaticValueProvider";
+import { StaticPositionProvider } from "../object-oriented-v2/StaticPositionProvider";
+import { Tickable, DrawProvider } from "../object-oriented-v2/baseTypes";
+import { LinearValueProvider } from "../object-oriented-v2/LinearValueProvider";
 
 
 //https://stackoverflow.com/questions/10420352/converting-file-size-in-bytes-to-human-readable-string
@@ -244,55 +249,316 @@ describe("FanRecursiveLineMaker recursionDepth: 2, nChildrenPerLevel: 2, x: 0, y
     });
 
 
-    it ("object-oriented performance test", () => {
-        console.info ("Object Orient Approach Peformance Test"); 
-        const m0 = getMemory(); 
-        const t0 = Date.now(); 
+    // it ("object-oriented performance test", () => {
+    //     console.info ("Object Orient Approach Peformance Test"); 
+    //     const m0 = getMemory(); 
+    //     const t0 = Date.now(); 
 
-        const lineMaker = new FanRecursiveLineMaker(20, 2, 0, 0, 1, 2, 1, 1);
-        const r1 = lineMaker.tick(); 
-        printMemory(getMemory() - m0); 
-        console.info(`Length: ${r1.length}`); 
-        console.info(`Time Taken: ${Date.now() - t0}ms`); 
-        const t1 = Date.now(); 
-        const r2 = lineMaker.tick(); 
-        console.info(`Length: ${r2.length}`); 
-        console.info(`Time Taken: ${Date.now() - t1}ms`); 
+    //     const lineMaker = new FanRecursiveLineMaker(20, 2, 0, 0, 1, 2, 1, 1);
+    //     const r1 = lineMaker.tick(); 
+    //     printMemory(getMemory() - m0); 
+    //     console.info(`Length: ${r1.length}`); 
+    //     console.info(`Time Taken: ${Date.now() - t0}ms`); 
+    //     const t1 = Date.now(); 
+    //     const r2 = lineMaker.tick(); 
+    //     console.info(`Length: ${r2.length}`); 
+    //     console.info(`Time Taken: ${Date.now() - t1}ms`); 
 
-    }); 
+    // }); 
 
-    it("functional-approach-1 perforance test", () => {
-        console.info("Functional Approach 1 Performance Test"); 
+    // it("functional-approach-1 perforance test", () => {
+    //     console.info("Functional Approach 1 Performance Test"); 
 
-        const t0 = Date.now(); 
-        const m0 = getMemory(); 
-        const tickFn = createFanRecursiveTickFn(20, 2, 0, 0, 1,1, 2, 1);
-        const r1 = tickFn(0); 
-        printMemory(getMemory() - m0); 
-        console.info(`Length: ${r1.length}`); 
-        console.info(`Time Taken: ${Date.now() - t0}ms`); 
-        const t1 = Date.now(); 
-        const r2 = tickFn(1); 
-        console.info(`Length: ${r2.length}`); 
-        console.info(`Time Taken: ${Date.now() - t1}ms`); 
-    }); 
+    //     const t0 = Date.now(); 
+    //     const m0 = getMemory(); 
+    //     const tickFn = createFanRecursiveTickFn(20, 2, 0, 0, 1,1, 2, 1);
+    //     const r1 = tickFn(0); 
+    //     printMemory(getMemory() - m0); 
+    //     console.info(`Length: ${r1.length}`); 
+    //     console.info(`Time Taken: ${Date.now() - t0}ms`); 
+    //     const t1 = Date.now(); 
+    //     const r2 = tickFn(1); 
+    //     console.info(`Length: ${r2.length}`); 
+    //     console.info(`Time Taken: ${Date.now() - t1}ms`); 
+    // }); 
 
-    it("functional-approach-2 perforance test", () => {
-        console.info("Functional Approach 2 Performance Test"); 
-        const t0 = Date.now(); 
-        const m0 = getMemory(); 
+    // it("functional-approach-2 perforance test", () => {
+    //     console.info("Functional Approach 2 Performance Test"); 
+    //     const t0 = Date.now(); 
+    //     const m0 = getMemory(); 
 
-        const li0 = instantiateFanRecursive(20, 2, 0, 0, 1, 1, 2, 1);
-        const r0 = getDrawablesFromLineInstances(li0); 
-        printMemory(getMemory() - m0); 
-        console.info(`Length: ${r0.length}`); 
-        console.info(`Time Taken: ${Date.now() - t0}ms`); 
-        const t1 = Date.now(); 
-        const li1 = reduceFanRecursive(li0, {
-            nTicks: 0
-        });
-        const r1 = getDrawablesFromLineInstances(li1); 
-        console.info(`Length: ${r1.length}`); 
-        console.info(`Time Taken: ${Date.now() - t1}ms`); 
-    }); 
+    //     const li0 = instantiateFanRecursive(20, 2, 0, 0, 1, 1, 2, 1);
+    //     const r0 = getDrawablesFromLineInstances(li0); 
+    //     printMemory(getMemory() - m0); 
+    //     console.info(`Length: ${r0.length}`); 
+    //     console.info(`Time Taken: ${Date.now() - t0}ms`); 
+    //     const t1 = Date.now(); 
+    //     const li1 = reduceFanRecursive(li0, {
+    //         nTicks: 0
+    //     });
+    //     const r1 = getDrawablesFromLineInstances(li1); 
+    //     console.info(`Length: ${r1.length}`); 
+    //     console.info(`Time Taken: ${Date.now() - t1}ms`); 
+    // }); 
 }); 
+
+
+describe("v-shape", () => {
+
+
+        const expectedResult0 = [
+            {
+                x: 1, 
+                y: 0
+            }, 
+            {
+                x: 1, 
+                y: 1, 
+            },
+            {
+                x: 3, 
+                y: -2
+            }
+        ]
+    
+        const expectedResult1 = [
+            {
+                x: 2, 
+                y: 0
+            }, 
+            {
+                x: 2, 
+                y: 2, 
+            },
+            {
+                x: 6, 
+                y: -4
+            }
+        ]
+        it ("Object-Oriented v2 returns correct", () => {
+            
+
+            const baseMover = new Mover(
+                new StaticPositionProvider(0,0), 
+                new StaticPositionProvider(1, 0), 
+                new StaticValueProvider(1)
+            ); 
+
+            const moverA = new Mover(
+                baseMover, 
+                new StaticPositionProvider(0,1), 
+                new StaticValueProvider(1)
+            )
+
+            const moverB = new Mover(
+                baseMover, 
+                new StaticPositionProvider(1,-1), 
+                new StaticValueProvider(2)
+            )
+
+            const allTicks : (Tickable & DrawProvider)[] =  [
+                baseMover, 
+                moverA, 
+                moverB
+            ]; 
+            
+
+            allTicks.forEach(v => v.tick()); 
+            const results0 = allTicks.flatMap(v => v.getDrawables());
+            allTicks.forEach(v => v.tick()); 
+            const results1 = allTicks.flatMap(v => v.getDrawables()); 
+            expect(results0).toEqual(expectedResult0); 
+            expect(results1).toEqual(expectedResult1); 
+
+        })
+    
+})
+
+
+describe("v-shape with dynamic base speed", () => {
+
+    const expectedResult0 = [
+        {
+            x: 1, 
+            y: 0
+        }, 
+        {
+            x: 1, 
+            y: 1, 
+        },
+        {
+            x: 3, 
+            y: -2
+        }
+    ]
+
+    const expectedResult1 = [
+        {
+            x: 3, 
+            y: 0
+        }, 
+        {
+            x: 3, 
+            y: 2, 
+        },
+        {
+            x: 7, 
+            y: -4
+        }
+    ]
+
+    const expectedResult2 = [
+        {
+            x: 6, 
+            y: 0
+        }, 
+        {
+            x: 6, 
+            y: 3, 
+        },
+        {
+            x: 12, 
+            y: -6
+        }
+    ]
+    it ("object-oriented v-2 works", () => {
+
+
+        const speed = new LinearValueProvider(1, 10, 1);
+        const baseMover = new Mover(
+            new StaticPositionProvider(0,0), 
+            new StaticPositionProvider(1, 0), 
+            speed, 
+        ); 
+
+        const moverA = new Mover(
+            baseMover, 
+            new StaticPositionProvider(0,1), 
+            new StaticValueProvider(1)
+        )
+
+        const moverB = new Mover(
+            baseMover, 
+            new StaticPositionProvider(1,-1), 
+            new StaticValueProvider(2)
+        )
+
+        const allTicks : (Tickable)[] =  [
+            baseMover, 
+            moverA, 
+            moverB, 
+            speed, 
+        ]; 
+
+        const allDraws : (DrawProvider[]) = [
+            baseMover, 
+            moverA, 
+            moverB, 
+        ]
+        
+
+        allTicks.forEach(v => v.tick()); 
+        const results0 = allDraws.flatMap(v => v.getDrawables());
+        allTicks.forEach(v => v.tick()); 
+        const results1 = allDraws.flatMap(v => v.getDrawables()); 
+        allTicks.forEach(v => v.tick()); 
+        const results2 = allDraws.flatMap(v => v.getDrawables()); 
+        expect(results0).toEqual(expectedResult0); 
+        expect(results1).toEqual(expectedResult1); 
+        expect(results2).toEqual(expectedResult2); 
+    })
+})
+
+describe("v-shape with dynamic shared speed", () => {
+
+    const expectedResult0 = [
+        {
+            x: 1, 
+            y: 0
+        }, 
+        {
+            x: 1, 
+            y: 1, 
+        },
+        {
+            x: 2, 
+            y: -1
+        }
+    ]
+
+    const expectedResult1 = [
+        {
+            x: 3, 
+            y: 0
+        }, 
+        {
+            x: 3, 
+            y: 3, 
+        },
+        {
+            x: 6, 
+            y: -3
+        }
+    ]
+
+    const expectedResult2 = [
+        {
+            x: 6, 
+            y: 0
+        }, 
+        {
+            x: 6, 
+            y: 6, 
+        },
+        {
+            x: 12, 
+            y: -6
+        }
+    ]
+    it ("object-oriented v-2 works", () => {
+
+
+        const speed = new LinearValueProvider(1, 10, 1);
+        const baseMover = new Mover(
+            new StaticPositionProvider(0,0), 
+            new StaticPositionProvider(1, 0), 
+            speed, 
+        ); 
+
+        const moverA = new Mover(
+            baseMover, 
+            new StaticPositionProvider(0,1), 
+            speed, 
+        )
+
+        const moverB = new Mover(
+            baseMover, 
+            new StaticPositionProvider(1,-1), 
+            speed, 
+        )
+
+        const allTicks : (Tickable)[] =  [
+            baseMover, 
+            moverA, 
+            moverB, 
+            speed, 
+        ]; 
+
+        const allDraws : (DrawProvider[]) = [
+            baseMover, 
+            moverA, 
+            moverB, 
+        ]
+        
+
+        allTicks.forEach(v => v.tick()); 
+        const results0 = allDraws.flatMap(v => v.getDrawables());
+        allTicks.forEach(v => v.tick()); 
+        const results1 = allDraws.flatMap(v => v.getDrawables()); 
+        allTicks.forEach(v => v.tick()); 
+        const results2 = allDraws.flatMap(v => v.getDrawables()); 
+        expect(results0).toEqual(expectedResult0); 
+        expect(results1).toEqual(expectedResult1); 
+        expect(results2).toEqual(expectedResult2); 
+    })
+})
